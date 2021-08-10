@@ -2,6 +2,7 @@ package com.example.sampleweatherapp.di
 
 import com.example.sampleweatherapp.MainActivityViewModel
 import com.example.sampleweatherapp.data.webservice.WebServiceClient
+import com.example.sampleweatherapp.repository.MainRepository
 import org.koin.dsl.module
 
 val webServiceModules = module {
@@ -9,7 +10,7 @@ val webServiceModules = module {
 }
 
 val repositoryModules = module {
-
+    single { MainRepository(get()) }
 }
 
 val viewModelModules = module {

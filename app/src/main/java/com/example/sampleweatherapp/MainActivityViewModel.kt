@@ -6,9 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sampleweatherapp.data.entities.WeatherEntity
 import com.example.sampleweatherapp.data.webservice.WebService
+import com.example.sampleweatherapp.repository.MainRepository
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel(private val webService: WebService) : ViewModel() {
+class MainActivityViewModel(private val MainRepository: MainRepository) : ViewModel() {
 
     private val weatherMutableLiveData = MutableLiveData<WeatherEntity>()
 
@@ -17,7 +18,7 @@ class MainActivityViewModel(private val webService: WebService) : ViewModel() {
 
     fun getWeatherDetail(city: String) {
         viewModelScope.launch {
-            val result = webService.getWeatherDetail(city).body()
+            val result = MainRepository.getWeatherDetail(city).body()
             weatherMutableLiveData.postValue(result)
         }
     }
